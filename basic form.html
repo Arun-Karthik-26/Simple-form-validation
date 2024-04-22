@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Basic form</title> 
+        <style>
+            body{
+                background-image: url("background1.jpg") ;
+                }
+            fieldset{
+                padding-right: 60px;
+                padding-left: 60px;
+                stroke: rgba(9, 238, 28, 0.562); 
+                border-color: rgb(97, 213, 237);
+                background-color:#afd9f1;
+            }
+            .bass
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                height: 650px;
+            }
+        </style>
+    </head>
+    <body>
+        <center><h1>Student Registration Form</h1></center>
+        <div class="bass">
+        <fieldset>
+            <legend><i>Student Details</i></legend>
+            <br>
+            <form action="form3.html" onsubmit="return formvalidate()">
+            <label>
+                First name : 
+            </label>
+            <input type="text" id="fname" placeholder="enter your first name" required >
+            <br><br>
+            <label>
+                Last name : 
+            </label>
+            <input type="text" id="lname" placeholder="enter your last name" required >
+            <br><br>
+            <label>
+                Gender :
+            </label>
+            <input type="radio" id="gen" name="gen" required>
+            <label>Male</label>
+            <input type="radio" id="gen" name="gen" required>
+            <label>Female</label>
+            <input type="radio" id="gen" name="gen" required>
+            <label>Others</label>
+            <br><br>
+            <label>
+                Date Of Birth :
+            </label>
+            <input type="date" id="DOB" required>
+            <br><br>
+            <label>Mail id :</label>
+            <input type="email" id="email" required></input>
+            <br><br>
+            <label>
+                Phone No :
+            </label>
+            <input type="number" id="phone" required >
+            <br><br>
+            <label>Department :</label><br>
+            <input type="checkbox" id="dep1" name="dep1" value="CSE" >
+            <label for="dep1">CSE</label>
+            <input type="checkbox" id="dep2" name="dep2" value="IT" >
+            <label for="dep2">IT</label>
+            <input type="checkbox" id="dep3" name="dep3" value="ECE" >
+            <label for="dep3">ECE</label><br><br>
+            <label>Year :</label>
+            <select name="year" id="year" required>
+            <option >select your year</option>   
+            <option value="1">I</option>
+            <option value="2">II</option>
+            <option value="3">III</option>
+            <option value="4">IV</option>
+            </select><br><br>
+            <label>
+                Age :
+            </label>
+            <input type="number" id="age" required><br><br>
+            <label>Address :</label><br>
+            <textarea name="Address" id="Address" cols="30" rows="3" required ></textarea><br><br>
+            <label>Password :</label>
+            <input type="password" name="pass" id="pass" placeholder="enter a strong Password" required ><br><br>
+            <label >Confirm new Password :</label>
+            <input type="password" name="pass" id="repass" placeholder="Re-enter your password" required ><br><br><br>
+            <center><input type="submit" value="Submit"></center>
+            </form>
+        </fieldset></div><br>
+        <script>
+          function formvalidate() {
+    var fname = document.getElementById("fname").value;
+    if (fname === "" || /\d/.test(fname)) {
+        window.alert("Please enter a valid first name");
+        return false;
+    }
+
+    var lname = document.getElementById("lname").value;
+    if (lname === "" || /\d/.test(lname)) {
+        window.alert("Please enter a valid last name");
+        return false;
+    }
+
+    var gender = document.querySelector('input[name="gen"]:checked');
+    if (!gender) {
+        window.alert("Please select a gender");
+        return false;
+    }
+
+    var email = document.getElementById("email").value;
+    if (email === "" || !isValidEmail(email)) {
+        window.alert("Please enter a valid email");
+        return false;
+    }
+
+    var ph = document.getElementById("phone").value;
+    if (ph.length !== 10 || isNaN(ph)) {
+        window.alert("Enter a valid 10-digit phone number");
+        return false;
+    }
+    var checkboxes = document.querySelectorAll('input[name="department"]:checked');
+     if (checkboxes.length === 0)
+      {
+          window.alert("Please select at least one department");
+         return false;
+      }
+
+    var year = document.getElementById("year").value;
+    if (year === "") 
+    {
+        window.alert("Please select your year");
+        return false;
+    }
+
+    var age = document.getElementById("age").value;
+    if (age < 0 || age === "") {
+        window.alert("Enter a valid age");
+        return false;
+    }
+
+    var addr = document.getElementById("Address").value;
+    var regex = /^[0-9A-Za-z\s,'-]*$/;
+    if (!regex.test(addr)) {
+        window.alert("Enter a valid address");
+        return false;
+    }
+
+    var pass = document.getElementById("pass").value;
+    var pattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!pattern.test(pass)) {
+        window.alert("Enter a 8-digit strong password\n The password should contain at least one digit, one special character");
+        return false;
+    }
+
+    var repass = document.getElementById("repass").value;
+    if (pass != repass) {
+        window.alert("Passwords do not match");
+        return false;
+    }
+
+    return true;
+}
+
+function isValidEmail(email) {
+    var re = /\S+@\S+\.\S+/;
+    return re.test(email);
+}
+
+        </script>
+    </body>
+</html>
